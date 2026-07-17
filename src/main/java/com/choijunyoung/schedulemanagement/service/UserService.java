@@ -15,7 +15,7 @@ public class UserService {
 
 
     public UserService(UserRepository userRepository) {
-
+        // 객체들 전달받는곳
         // 생성자(Constructor)
         // UserService 객체가 생성될 때 자동으로 한 번 실행된다.
 
@@ -28,6 +28,8 @@ public class UserService {
         // 즉, UserRepository 객체를 하나 전달받겠다는 의미이다.
 
         this.userRepository = userRepository;
+        //this는 현재생성되거나 실행중인 객체를 가르키는 참조 변수임
+        // 전달받은 객체를 저장하는곳
 
         // this.userRepository
         // → UserService 클래스의 필드(위에서 선언한 변수)
@@ -44,6 +46,7 @@ public class UserService {
         // Spring은 UserService 객체를 만들 때
         // UserRepository 객체를 자동으로 전달해 준다.
         // 이것을 생성자 의존성 주입(Constructor Injection)이라고 한다.
+
     }
         public User save(User user){
             return userRepository.save(user);
