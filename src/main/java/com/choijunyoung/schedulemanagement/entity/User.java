@@ -32,7 +32,7 @@ public class User {
     // protected User가 필요한 이유는 JPA가 객체를 만들기 위해 사용하는 생성자
     // setter를 안쓴 이유는 아무 곳에서나 변경되는것을 막기 위해서, role을 아무데서나 ADMIN으로 바꾸면 위험함 그래서 별도의 메소드가 필요
     }
-    // 아래 코드는 User라는 객체를 생성
+    // 아래 코드는 User 라는 객체를 생성
     public User(String username, String password, String name, Role role){
         this.username = username;
         this.password = password;
