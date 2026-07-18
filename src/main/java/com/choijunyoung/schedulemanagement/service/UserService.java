@@ -18,6 +18,7 @@ public class UserService {
         // 객체들 전달받는곳
         // 생성자(Constructor)
         // UserService 객체가 생성될 때 자동으로 한 번 실행된다.
+        // userRepository는 택배기사가 잠깐 들고 있는 컵임
 
         // 생성자의 이름은 반드시 클래스 이름(UserService)과 같아야 한다.
         // 생성자는 반환 타입(void, int 등)이 없다.
@@ -29,23 +30,13 @@ public class UserService {
 
         this.userRepository = userRepository;
         //this는 현재생성되거나 실행중인 객체를 가르키는 참조 변수임
-        // 전달받은 객체를 저장하는곳
-
-        // this.userRepository
-        // → UserService 클래스의 필드(위에서 선언한 변수)
-
-        // userRepository
-        // → 생성자의 매개변수(외부에서 전달받은 객체)
-
-        // = 는 오른쪽의 값을 왼쪽 변수에 저장한다.
-
-        // 즉,
-        // 생성자로 전달받은 UserRepository 객체를
-        // UserService 객체의 userRepository 필드에 저장하는 코드이다.
-
-        // Spring은 UserService 객체를 만들 때
-        // UserRepository 객체를 자동으로 전달해 준다.
-        // 이것을 생성자 의존성 주입(Constructor Injection)이라고 한다.
+        // 비유를 하자면 컵이라서 생각하자
+        // 컵이라는 객체
+        // 스프링이 컵이라는 객체를 만듬
+        // 서비스에게 이 컵 써 라고 건넨다
+        // 서비스는 this.userRepository = userRepository; 로 자기 책상에 컵을 올려두는것임
+        // 생성자가 끝나면 택배기사는 사라진다 하지만 책상에 있는 컵은 그대로
+        // 그래서 나중에 호출할떄 사용하는게 책상에 올려놓은 필드
 
     }
         public User save(User user){
