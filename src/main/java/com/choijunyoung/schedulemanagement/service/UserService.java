@@ -45,7 +45,8 @@ public class UserService {
         // public이라서 다른 클래스에서 사용할수 있다
         // User객체 반환 회원 한 명 데이터
         // 저장할 객체 생성
-        // userRepository는 스프힝이 만들어준 Repository객체다
-        // DB와 대화하는객체임 userRepository DB를 조작하는 기능이다(데이터를 저장,조회)
+        // userRepository는 스프링이 만들어준 Repository객체다
+        // DB와 대화하는객체임 userRepository DB를 조작하는 기능이다(데이터를 저장,조회) 이제 엔터티로 데이터를 상호작용하는것임
+
     }
 
