@@ -15,6 +15,9 @@ public class UserService {
 
 
     public UserService(UserRepository userRepository) {
+        // 이것도 스프링이 만든 하나의 객체
+        // 흐름은 UseRepository에서 객체 생성 -> UserService 생성자에게 전달
+
         // 객체들 전달받는곳
         // 생성자(Constructor)
         // UserService 객체가 생성될 때 자동으로 한 번 실행된다.
