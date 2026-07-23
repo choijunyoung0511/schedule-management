@@ -43,6 +43,11 @@ public class UserService {
 
     }
         public User save(User user){
+            if  (userRepository.existsByUsername(user.getUsername())){
+                throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
+            }
+
+
             return userRepository.save(user);
         }
         // public이라서 다른 클래스에서 사용할수 있다

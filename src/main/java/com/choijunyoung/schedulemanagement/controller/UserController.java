@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RequestMapping("/users")
-// 경로반환 /users 이 요청이 들어오면 이 컨트롤러로 받겠다.
+    //users 이 요청이 들어오면 이 컨트롤러로 받겠다.
 
 public class UserController {
     private final UserService userService;
