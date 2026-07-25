@@ -1,4 +1,4 @@
-package com.choijunyoung.schedulemanagement.dto;
+package com.choijunyoung.schedulemanagement.dto.login;
 
 public class LoginResponse {
     private String username;
