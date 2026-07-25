@@ -1,6 +1,8 @@
 package com.choijunyoung.schedulemanagement.controller;
 
 
+import com.choijunyoung.schedulemanagement.dto.LoginRequest;
+import com.choijunyoung.schedulemanagement.dto.LoginResponse;
 import com.choijunyoung.schedulemanagement.dto.UserCreateRequest;
 import com.choijunyoung.schedulemanagement.entity.User;
 import com.choijunyoung.schedulemanagement.service.UserService;
@@ -49,6 +51,17 @@ public class UserController {
 
 
 
+
+
     }
+    @PostMapping("/login")
+    public LoginResponse login(@RequestBody LoginRequest request){
+        User user = userService.login(
+                request.getUsername(),
+                request.getPassword());
+        return new LoginResponse(user.getUsername());
+
+    }
+
 
 }

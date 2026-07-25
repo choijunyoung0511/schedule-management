@@ -3,6 +3,8 @@ package com.choijunyoung.schedulemanagement.repository;
 import com.choijunyoung.schedulemanagement.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, Long> {
     //자바에서는 매서드(기능)은 객체를 통해서 실행됨
     //Spring이 미리 만들어둔 Repository 인터페이스를 사용하는것임
@@ -18,4 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //확인하고 내부에서 sql문 실행
     //아이디 중복검사,username이 같은 회원이 존재하는지 확인
     //있으면 True,없으면 False반환함
+
+    Optional<User> findByUsername(String username);
+    //Login할떄 DB에서 회원을 찾기 위한 역할
 }
