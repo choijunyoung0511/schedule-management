@@ -14,10 +14,12 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    //비밀번호 암호화 도구를 스프링에 등록
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+    //어떤 API는 로그인 없이 접근 가능한지 보안 규칙 설정
+    //밑에 코드는 주소별 접근 권한을 정하는 부분
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
