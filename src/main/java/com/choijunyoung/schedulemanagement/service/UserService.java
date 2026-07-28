@@ -70,8 +70,12 @@ public class UserService {
     //matches로 둘이 비밀번호가 같은지 검사
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username)
+
+                //예외처리 코드 아이디가 없을떄  DB조회 -> 회원 찾음 구조
                 .orElseThrow(() -> new IllegalArgumentException("아이디가 존재하지 않습니다."));
         if (!passwordEncoder.matches(password, user.getPassword())) {
+            //!가 들어가서 비번 맞을떄는 if문 실행안함
+            //비번이 틀릴떄는 예외발생
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
         return user;
