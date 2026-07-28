@@ -62,6 +62,9 @@ public class UserController {
         return new LoginResponse(user.getUsername());
 
     }
+    //로그인 요청 올때마다 새로 만들어짐
+    // 리턴 new 부분을 사용할려면 위해서 무조건 User변수가 user에 저장되어있어야됨
+    //request는 가져오기만 하고 저장은 user에다가
 
 
 }
