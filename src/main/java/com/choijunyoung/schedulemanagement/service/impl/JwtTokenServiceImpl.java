@@ -40,4 +40,27 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 
         return Keys.hmacShaKeyFor(keyBytes);
     }
+    @Override
+    public String getUsername(String token) {
+        return Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getBody()
+                .getSubject();
+    }
+    @Override
+    public boolean validateToken(String token) {
+        try{
+            Jwts.parser()
+                    .verifyWith(getSigningKey())
+                    .build()
+                    .parseSignedClaims(token);
+
+            return true;
+
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

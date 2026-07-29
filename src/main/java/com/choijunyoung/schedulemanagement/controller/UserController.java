@@ -5,6 +5,7 @@ import com.choijunyoung.schedulemanagement.dto.login.LoginRequest;
 import com.choijunyoung.schedulemanagement.dto.login.LoginResponse;
 import com.choijunyoung.schedulemanagement.dto.UserCreateRequest;
 import com.choijunyoung.schedulemanagement.entity.User;
+import com.choijunyoung.schedulemanagement.service.JwtTokenService;
 import com.choijunyoung.schedulemanagement.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 //객체를 전달하는 코드이기 때문에 json또는 xml형식으로 직렬화하여 클라이언트 에게 전당
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class UserController {
     private final UserService userService;
+    private final JwtTokenService jwtTokenService;
     //이 UserService객체는 스프링이 딱 한번 생성한 객체임
     //객체의 흐름은 UserService객체 생성 -> UserController 생성자에게 전달
 
@@ -29,8 +32,9 @@ public class UserController {
     @Autowired
     // 생성자 주입
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, JwtTokenService jwtTokenService) {
         this.userService = userService;
+        this.jwtTokenService = jwtTokenService;
     }
     @PostMapping
     // post 요청이 들어오면 아래 메서드를 실행해라
@@ -59,12 +63,18 @@ public class UserController {
         User user = userService.login(
                 request.getUsername(),
                 request.getPassword());
-        return new LoginResponse(user.getUsername());
+        String token = jwtTokenService.createToken(user.getUsername());
+        return new LoginResponse(token);
 
     }
     //로그인 요청 올때마다 새로 만들어짐
     // 리턴 new 부분을 사용할려면 위해서 무조건 User변수가 user에 저장되어있어야됨
     //request는 가져오기만 하고 저장은 user에다가
+
+    @GetMapping("/test")
+    public String test() {
+        return "JWT 인증 성공";
+    }
 
 
 }
