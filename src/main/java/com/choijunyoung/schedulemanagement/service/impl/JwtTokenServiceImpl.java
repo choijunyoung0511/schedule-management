@@ -11,22 +11,29 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Service
+//스프링이 객체를 생성해서 관리
 public class JwtTokenServiceImpl implements JwtTokenService {
 
     private final JwtConfig jwtConfig;
+    //jwt설정을  저장할 변수
 
     public JwtTokenServiceImpl(JwtConfig jwtConfig) {
         this.jwtConfig = jwtConfig;
+        //전달받은 JwtConfig를 필드에 저장
     }
 
     @Override
     public String createToken(String username) {
-        Date now = new Date();
+        //jwt생성 매서드
 
+        Date now = new Date();
+        //현재시간
         Date expirationDate =
                 new Date(now.getTime() + jwtConfig.getExpiration());
-
+        //현재시간 + 만료시간
+        // 토큰 만료 시각 생성
         return Jwts.builder()
+                //jwt생성 시작
                 .subject(username)
                 .issuedAt(now)
                 .expiration(expirationDate)
@@ -35,10 +42,12 @@ public class JwtTokenServiceImpl implements JwtTokenService {
     }
 
     private SecretKey getSigningKey() {
+        //jwt서명용 비밀키 생성 대서드
         byte[] keyBytes =
                 Decoders.BASE64.decode(jwtConfig.getSecret());
 
         return Keys.hmacShaKeyFor(keyBytes);
+        //byte[]를 SecretKey객체로 변환
     }
     @Override
     public String getUsername(String token) {
@@ -51,6 +60,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
     }
     @Override
     public boolean validateToken(String token) {
+        //유효성 검사
         try{
             Jwts.parser()
                     .verifyWith(getSigningKey())
