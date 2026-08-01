@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.security.core.Authentication;
 
 @RestController
 //객체를 전달하는 코드이기 때문에 json또는 xml형식으로 직렬화하여 클라이언트 에게 전당
@@ -74,6 +75,10 @@ public class UserController {
     @GetMapping("/test")
     public String test() {
         return "JWT 인증 성공";
+    }
+    @GetMapping("/me")
+    public String getCurrentUser(Authentication authentication) {
+        return authentication.getName();
     }
 
 
