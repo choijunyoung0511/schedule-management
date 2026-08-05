@@ -1,5 +1,6 @@
-package com.choijunyoung.schedulemanagement.entity;
+package com.choijunyoung.schedulemanagement.entity.Meal;
 
+import com.choijunyoung.schedulemanagement.entity.User.User;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

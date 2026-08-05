@@ -3,22 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="음식 기록과 하루 칼로리를 관리하는 Calorie AI" />
+  <meta name="description" content="음식 사진을 AI로 분석하고 하루 칼로리를 관리하는 Calorie AI" />
   <title>Calorie AI</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#home"><span class="brand-mark">C</span><span>CALORIE AI</span></a>
+    <a class="brand" href="#home">
+      <span class="brand-mark">C</span>
+      <span>CALORIE AI</span>
+    </a>
+
     <nav>
       <a href="#home">홈</a>
-      <a href="#service">식사 기록</a>
+      <a href="#service">AI 분석</a>
       <a href="#records">내 기록</a>
     </nav>
+
     <div id="guestActions" class="header-actions">
       <button class="text-btn" data-open-auth="login">로그인</button>
       <button class="primary-small" data-open-auth="signup">회원가입</button>
     </div>
+
     <div id="userActions" class="header-actions hidden">
       <span id="headerUsername" class="username"></span>
       <button id="logoutBtn" class="text-btn">로그아웃</button>
@@ -28,17 +34,32 @@
   <main>
     <section id="home" class="hero">
       <div class="hero-copy">
-        <span class="eyebrow">PERSONAL NUTRITION DASHBOARD</span>
-        <h1>오늘 먹은 것을<br /><span>한눈에 관리하세요</span></h1>
-        <p>식사 기록을 저장하고, 분석된 칼로리를 반영해 아침·점심·저녁·간식의 하루 총 섭취량을 확인합니다.</p>
+        <span class="eyebrow">AI FOOD CALORIE ANALYSIS</span>
+        <h1>음식 사진 한 장으로<br /><span>칼로리를 분석하세요</span></h1>
+        <p>
+          사진을 업로드하면 Gemini가 음식명과 예상 칼로리를 분석합니다.
+          분석 결과는 식사 기록에 자동 저장되고 오늘 섭취량에 반영됩니다.
+        </p>
+
         <div class="hero-buttons">
-          <button class="primary-btn" id="heroStartBtn">식사 기록 시작</button>
-          <a class="secondary-btn" href="#service">기능 보기</a>
+          <button class="primary-btn" id="heroStartBtn">사진 분석 시작</button>
+          <a class="secondary-btn" href="#records">내 기록 보기</a>
         </div>
       </div>
+
       <div class="hero-panel">
-        <div class="panel-top"><span>오늘 섭취량</span><strong id="heroTotal">0 kcal</strong></div>
-        <div class="hero-ring"><div><strong id="heroRingValue">0</strong><span>kcal</span></div></div>
+        <div class="panel-top">
+          <span>오늘 섭취량</span>
+          <strong id="heroTotal">0 kcal</strong>
+        </div>
+
+        <div class="hero-ring">
+          <div>
+            <strong id="heroRingValue">0</strong>
+            <span>kcal</span>
+          </div>
+        </div>
+
         <div class="mini-grid">
           <div><span>아침</span><strong id="heroBreakfast">0</strong></div>
           <div><span>점심</span><strong id="heroLunch">0</strong></div>
@@ -50,119 +71,183 @@
 
     <section id="service" class="service-section">
       <div class="section-heading">
-        <span class="eyebrow dark">4 STEP MEAL FLOW</span>
-        <h2>현재 완성된 기능을 실제 화면으로 연결했습니다</h2>
-        <p>로그인 후 식사 기록 생성, 분석 결과 저장, 목록 조회, 오늘 칼로리 합계를 사용할 수 있습니다.</p>
+        <span class="eyebrow dark">UPLOAD · ANALYZE · SAVE</span>
+        <h2>사진 업로드부터 기록 저장까지 한 번에</h2>
+        <p>
+          로그인 후 음식 사진과 식사 구분을 선택하면 이미지 업로드,
+          Gemini 분석, Meal 생성, 칼로리 반영이 자동으로 진행됩니다.
+        </p>
       </div>
 
       <div id="loginRequired" class="login-required">
         <div class="lock-icon">🔒</div>
         <h3>로그인이 필요합니다</h3>
-        <p>JWT 인증 후 개인 식사 기록에 접근할 수 있습니다.</p>
+        <p>JWT 인증 후 음식 사진 분석과 개인 기록 저장 기능을 사용할 수 있습니다.</p>
         <button class="primary-btn" data-open-auth="login">로그인하기</button>
       </div>
 
       <div id="serviceApp" class="service-app hidden">
-        <div class="stepper">
-          <button class="step active" data-step="1"><span>1</span><strong>식사 등록</strong><small>POST /meals</small></button>
-          <button class="step" data-step="2"><span>2</span><strong>분석 입력</strong><small>칼로리 입력</small></button>
-          <button class="step" data-step="3"><span>3</span><strong>분석 반영</strong><small>PATCH API</small></button>
-          <button class="step" data-step="4"><span>4</span><strong>결과 확인</strong><small>오늘 합계</small></button>
-        </div>
-
         <div class="workspace">
-          <section class="work-card" id="step1Panel">
-            <div class="work-head"><span>STEP 01</span><h3>식사 기록 만들기</h3><p>실제 이미지 업로드 API가 아직 없으므로 현재는 이미지 URL 또는 파일명을 저장합니다.</p></div>
-            <form id="mealCreateForm" class="form-grid">
-              <label>식사 구분
-                <select id="mealType" required>
-                  <option value="BREAKFAST">아침</option>
-                  <option value="LUNCH" selected>점심</option>
-                  <option value="DINNER">저녁</option>
-                  <option value="SNACK">간식</option>
-                </select>
-              </label>
-              <label>이미지 URL 또는 파일명
-                <input id="imageUrl" type="text" placeholder="예: lunch-2026-08-01.jpg" required />
-              </label>
-              <button class="submit-btn" type="submit">식사 기록 저장</button>
+          <section class="work-card">
+            <div class="work-head">
+              <span>AI MEAL ANALYSIS</span>
+              <h3>음식 사진 분석</h3>
+              <p>
+                JPG, PNG, WEBP 형식의 음식 사진을 선택하세요.
+                AI 분석 결과는 추정치이며 실제 양과 재료에 따라 달라질 수 있습니다.
+              </p>
+            </div>
+
+            <form id="aiMealForm" class="analysis-layout">
+              <div class="analysis-form">
+                <label>
+                  식사 구분
+                  <select id="mealType" required>
+                    <option value="BREAKFAST">아침</option>
+                    <option value="LUNCH" selected>점심</option>
+                    <option value="DINNER">저녁</option>
+                    <option value="SNACK">간식</option>
+                  </select>
+                </label>
+
+                <label>
+                  음식 사진
+                  <input
+                    id="foodImage"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    required
+                  />
+                </label>
+
+                <div id="imagePreviewWrap" class="image-preview-wrap hidden">
+                  <img id="imagePreview" alt="선택한 음식 사진 미리보기" />
+                </div>
+
+                <button id="analyzeBtn" class="submit-btn" type="submit">
+                  AI 분석하고 저장하기
+                </button>
+
+                <p class="form-note">
+                  분석에는 보통 몇 초 정도 걸립니다. 버튼을 여러 번 누르지 마세요.
+                </p>
+              </div>
+
+              <div id="aiResult" class="ai-result empty">
+                <div class="result-placeholder">
+                  <span class="result-icon">✨</span>
+                  <strong>아직 분석 결과가 없습니다.</strong>
+                  <p>사진을 선택하고 AI 분석을 실행해 주세요.</p>
+                </div>
+              </div>
             </form>
           </section>
 
-          <section class="work-card hidden" id="step2Panel">
-            <div class="work-head"><span>STEP 02</span><h3>분석할 식사 선택</h3><p>저장된 기록 중 하나를 선택하고 AI 분석 결과라고 가정할 총 칼로리를 입력합니다.</p></div>
-            <form id="analysisForm" class="form-grid">
-              <label>식사 기록
-                <select id="analysisMealId" required></select>
-              </label>
-              <label>총칼로리
-                <div class="unit-input"><input id="analysisCalories" type="number" min="0" placeholder="850" required /><span>kcal</span></div>
-              </label>
-              <button class="submit-btn" type="submit">분석 결과 반영</button>
-            </form>
-          </section>
+          <section class="today-panel">
+            <div class="today-panel-head">
+              <div>
+                <span class="eyebrow dark">TODAY</span>
+                <h3>오늘의 칼로리</h3>
+              </div>
+              <button id="refreshDashboardBtn" class="secondary-dark-btn">새로고침</button>
+            </div>
 
-          <section class="work-card hidden" id="step3Panel">
-            <div class="work-head"><span>STEP 03</span><h3>분석 결과 반영 완료</h3><p>선택한 식사에 총칼로리가 저장되고 분석 상태가 완료로 변경됩니다.</p></div>
-            <div id="analysisResult" class="result-card empty">아직 반영된 분석 결과가 없습니다.</div>
-            <button class="submit-btn" id="goResultBtn">오늘 결과 확인</button>
-          </section>
-
-          <section class="work-card hidden" id="step4Panel">
-            <div class="work-head"><span>STEP 04</span><h3>오늘의 칼로리 결과</h3><p>분석 완료된 오늘 식사만 합산합니다.</p></div>
             <div class="today-grid">
               <article><span>아침</span><strong id="todayBreakfast">0</strong><small>kcal</small></article>
               <article><span>점심</span><strong id="todayLunch">0</strong><small>kcal</small></article>
               <article><span>저녁</span><strong id="todayDinner">0</strong><small>kcal</small></article>
               <article><span>간식</span><strong id="todaySnack">0</strong><small>kcal</small></article>
             </div>
-            <div class="total-card"><span>오늘 총 섭취 칼로리</span><strong id="todayTotal">0 kcal</strong></div>
+
+            <div class="total-card">
+              <span>오늘 총 섭취 칼로리</span>
+              <strong id="todayTotal">0 kcal</strong>
+            </div>
           </section>
         </div>
       </div>
     </section>
 
     <section id="records" class="records-section">
-      <div class="section-heading left">
-        <span class="eyebrow dark">MY MEALS</span>
-        <h2>내 식사 기록</h2>
-        <p>로그인한 사용자의 기록만 최신순으로 조회합니다.</p>
+      <div class="records-head">
+        <div class="section-heading left">
+          <span class="eyebrow dark">MY MEALS</span>
+          <h2>내 식사 기록</h2>
+          <p>로그인한 사용자의 식사 기록을 최신순으로 확인합니다.</p>
+        </div>
+
+        <button id="refreshRecordsBtn" class="secondary-dark-btn">기록 새로고침</button>
       </div>
-      <div class="records-toolbar">
-        <button id="refreshRecordsBtn" class="secondary-dark-btn">새로고침</button>
+
+      <div id="recordsEmpty" class="empty-state">
+        로그인하면 식사 기록을 볼 수 있습니다.
       </div>
-      <div id="recordsEmpty" class="empty-state">로그인하면 식사 기록을 볼 수 있습니다.</div>
+
       <div id="mealList" class="meal-list hidden"></div>
     </section>
   </main>
 
-  <footer><div class="brand footer-brand"><span class="brand-mark">C</span><span>CALORIE AI</span></div><p>Spring Boot · JWT · JPA 기반 사이드 프로젝트</p></footer>
+  <footer>
+    <div class="brand footer-brand">
+      <span class="brand-mark">C</span>
+      <span>CALORIE AI</span>
+    </div>
+    <p>Spring Boot · JWT · Gemini · JPA</p>
+  </footer>
 
   <div id="authModal" class="modal-backdrop hidden">
     <div class="auth-modal">
-      <button id="closeModalBtn" class="modal-close">×</button>
+      <button id="closeModalBtn" class="modal-close" type="button">×</button>
+
       <div class="auth-tabs">
-        <button class="auth-tab active" data-auth-tab="login">로그인</button>
-        <button class="auth-tab" data-auth-tab="signup">회원가입</button>
+        <button class="auth-tab active" data-auth-tab="login" type="button">로그인</button>
+        <button class="auth-tab" data-auth-tab="signup" type="button">회원가입</button>
       </div>
-      <div class="auth-title"><span>CALORIE AI ACCOUNT</span><h2 id="authHeading">로그인</h2><p id="authSubheading">계정에 로그인하고 식사 기록을 관리하세요.</p></div>
+
+      <div class="auth-title">
+        <span>CALORIE AI ACCOUNT</span>
+        <h2 id="authHeading">로그인</h2>
+        <p id="authSubheading">계정에 로그인하고 음식 사진을 분석하세요.</p>
+      </div>
+
       <form id="loginForm" class="auth-form">
-        <label>아이디<input id="loginUsername" autocomplete="username" required /></label>
-        <label>비밀번호<input id="loginPassword" type="password" autocomplete="current-password" required /></label>
+        <label>
+          아이디
+          <input id="loginUsername" autocomplete="username" required />
+        </label>
+        <label>
+          비밀번호
+          <input id="loginPassword" type="password" autocomplete="current-password" required />
+        </label>
         <button class="submit-btn" type="submit">로그인</button>
       </form>
+
       <form id="signupForm" class="auth-form hidden">
-        <label>아이디<input id="signupUsername" required /></label>
-        <label>이름<input id="signupName" required /></label>
-        <label>비밀번호<input id="signupPassword" type="password" required /></label>
-        <label>비밀번호 확인<input id="signupPasswordConfirm" type="password" required /></label>
+        <label>
+          아이디
+          <input id="signupUsername" required />
+        </label>
+        <label>
+          이름
+          <input id="signupName" required />
+        </label>
+        <label>
+          비밀번호
+          <input id="signupPassword" type="password" required />
+        </label>
+        <label>
+          비밀번호 확인
+          <input id="signupPasswordConfirm" type="password" required />
+        </label>
         <button class="submit-btn" type="submit">회원가입</button>
       </form>
+
       <div id="authMessage" class="message hidden"></div>
     </div>
   </div>
 
   <div id="toast" class="toast hidden"></div>
+
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.choijunyoung.schedulemanagement.service;
 
-import com.choijunyoung.schedulemanagement.entity.User;
+import com.choijunyoung.schedulemanagement.entity.User.User;
 import com.choijunyoung.schedulemanagement.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

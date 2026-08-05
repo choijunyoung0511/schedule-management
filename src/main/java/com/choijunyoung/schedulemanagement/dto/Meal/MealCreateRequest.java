@@ -1,6 +1,6 @@
 package com.choijunyoung.schedulemanagement.dto.Meal;
 
-import com.choijunyoung.schedulemanagement.entity.MealType;
+import com.choijunyoung.schedulemanagement.entity.Meal.MealType;
 import jakarta.validation.constraints.NotNull;
 
 public class MealCreateRequest {

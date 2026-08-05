@@ -56,7 +56,10 @@ public class SecurityConfig {
                         // 회원가입과 로그인 API는 JWT 없이 접근 가능
                         .requestMatchers(
                                 "/users",
-                                "/users/login"
+                                "/users/login",
+                                "/gemini/test",
+                                "/gemini/food",
+                                "/gemini/analyze-image"
                         ).permitAll()
 
                         // 위에서 허용하지 않은 모든 요청은 JWT 인증 필요

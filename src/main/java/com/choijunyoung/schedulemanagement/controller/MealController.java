@@ -2,7 +2,7 @@ package com.choijunyoung.schedulemanagement.controller;
 
 
 import com.choijunyoung.schedulemanagement.dto.Meal.MealCreateRequest;
-import com.choijunyoung.schedulemanagement.entity.Meal;
+import com.choijunyoung.schedulemanagement.entity.Meal.Meal;
 import com.choijunyoung.schedulemanagement.service.MealService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.choijunyoung.schedulemanagement.dto.Meal.MealResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
-import com.choijunyoung.schedulemanagement.dto.MealAnalysisRequest;
+import com.choijunyoung.schedulemanagement.dto.Meal.MealAnalysisRequest;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.choijunyoung.schedulemanagement.dto.Meal.TodayCaloriesResponse;

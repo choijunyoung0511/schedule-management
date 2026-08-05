@@ -1,4 +1,4 @@
-package com.choijunyoung.schedulemanagement.entity;
+package com.choijunyoung.schedulemanagement.entity.Meal;
 
 public enum MealType {
     //아침

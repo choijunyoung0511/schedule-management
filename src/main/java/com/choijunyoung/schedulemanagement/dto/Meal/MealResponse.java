@@ -1,7 +1,7 @@
 package com.choijunyoung.schedulemanagement.dto.Meal;
 
-import com.choijunyoung.schedulemanagement.entity.Meal;
-import com.choijunyoung.schedulemanagement.entity.MealType;
+import com.choijunyoung.schedulemanagement.entity.Meal.Meal;
+import com.choijunyoung.schedulemanagement.entity.Meal.MealType;
 
 public class MealResponse {
     private Long id;

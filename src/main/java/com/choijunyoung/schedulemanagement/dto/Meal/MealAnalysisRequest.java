@@ -1,4 +1,4 @@
-package com.choijunyoung.schedulemanagement.dto;
+package com.choijunyoung.schedulemanagement.dto.Meal;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package com.choijunyoung.schedulemanagement.dto;
 
-import com.choijunyoung.schedulemanagement.entity.Role;
+import com.choijunyoung.schedulemanagement.entity.User.Role;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

@@ -4,7 +4,7 @@ package com.choijunyoung.schedulemanagement.controller;
 import com.choijunyoung.schedulemanagement.dto.login.LoginRequest;
 import com.choijunyoung.schedulemanagement.dto.login.LoginResponse;
 import com.choijunyoung.schedulemanagement.dto.UserCreateRequest;
-import com.choijunyoung.schedulemanagement.entity.User;
+import com.choijunyoung.schedulemanagement.entity.User.User;
 import com.choijunyoung.schedulemanagement.service.JwtTokenService;
 import com.choijunyoung.schedulemanagement.service.UserService;
 import jakarta.validation.Valid;
