@@ -27,6 +27,10 @@ public class Meal {
     @Column(nullable = false, length = 500)
     private String imageUrl;
 
+
+    @Column(nullable = false)
+    private Integer amount;
+
     // 분석 완료 후 총칼로리
     private Integer totalCalories;
 
@@ -45,11 +49,13 @@ public class Meal {
     public Meal(
             User user,
             MealType mealType,
-            String imageUrl
+            String imageUrl,
+            Integer amount
     ) {
         this.user = user;
         this.type = mealType;
         this.imageUrl = imageUrl;
+        this.amount = amount;
         this.totalCalories = null;
         this.analyzed = false;
         this.createdAt = LocalDateTime.now();
@@ -87,4 +93,9 @@ public class Meal {
         this.totalCalories = totalCalories;
         this.analyzed = true;
     }
+    public Integer getAmount() {
+        return amount;
+    }
+
+
 }

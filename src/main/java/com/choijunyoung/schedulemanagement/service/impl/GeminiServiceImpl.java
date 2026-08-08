@@ -77,7 +77,8 @@ public class GeminiServiceImpl implements GeminiService {
 
     @Override
     public FoodAnalysisResponse analyzeFoodImage(
-            MultipartFile file
+            MultipartFile file,
+            Integer amount
     ) {
         validateImage(file);
 
@@ -96,18 +97,31 @@ public class GeminiServiceImpl implements GeminiService {
         }
 
         String prompt = """
-                이 음식 사진을 분석해 주세요.
+        이 음식 사진을 분석해 주세요.
 
-                사진에 보이는 음식을 식별하고,
-                일반적인 1인분을 기준으로 예상 칼로리를 계산하세요.
+        사진에 보이는 음식을 식별하세요.
 
-                사진만으로 정확한 양을 알 수 없으므로
-                가장 현실적인 하나의 정수 칼로리를 반환하세요.
+        사용자가 입력한 음식의 양은 %dg 입니다.
 
-                description에는 추정 근거와
-                사진만으로는 정확하지 않을 수 있다는 내용을
-                짧게 작성하세요.
-                """;
+        일반적인 1인분 기준이 아니라
+        사용자가 입력한 %dg을 기준으로
+        예상 칼로리를 계산하세요.
+
+        아래 JSON 형식으로만 응답하세요.
+
+        foodName : 음식 이름
+        estimatedCalories : 칼로리(정수)
+        description : 추정 근거
+
+        description에는
+        음식 종류,
+        입력된 양을 반영한 계산 근거,
+        사진 분석 결과이므로 실제와 차이가 있을 수 있다는 내용을
+        짧게 작성하세요.
+        """.formatted(amount, amount);
+
+
+
 
         Map<String, Object> imagePart = Map.of(
                 "inlineData", Map.of(

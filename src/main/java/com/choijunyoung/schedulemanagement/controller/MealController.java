@@ -6,16 +6,11 @@ import com.choijunyoung.schedulemanagement.entity.Meal.Meal;
 import com.choijunyoung.schedulemanagement.service.MealService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.choijunyoung.schedulemanagement.dto.Meal.MealResponse;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import java.util.List;
 import com.choijunyoung.schedulemanagement.dto.Meal.MealAnalysisRequest;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import com.choijunyoung.schedulemanagement.dto.Meal.TodayCaloriesResponse;
 
 @RestController
@@ -72,5 +67,17 @@ public class MealController {
         String username = authentication.getName();
         return mealService.getTodayCalories(username);
     }
+    @DeleteMapping("/{mealId}")
+    public void deleteMeal(
+            Authentication authentication,
+            @PathVariable Long mealId
+
+    ){
+        mealService.deleteMeal(
+                mealId,
+                authentication.getName()
+        );
+    }
+
 
 }

@@ -11,10 +11,16 @@ public class MealCreateRequest {
     @NotNull
     private String imageUrl;
 
+    @NotNull
+    private Integer amount;
+
     public MealType getMealType() {
         return mealType;
     }
     public String getImageUrl() {
         return imageUrl;
+    }
+    public Integer getAmount() {
+        return amount;
     }
 }

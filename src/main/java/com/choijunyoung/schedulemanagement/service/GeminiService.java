@@ -8,7 +8,8 @@ public interface GeminiService {
     String analyzeFood(String foodName);
 
     FoodAnalysisResponse analyzeFoodImage(
-            MultipartFile file
+            MultipartFile file,
+            Integer amount
     );
 
 }

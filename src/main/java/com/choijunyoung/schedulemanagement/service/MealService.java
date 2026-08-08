@@ -25,6 +25,13 @@ public interface MealService {
             MealAnalysisRequest request
     );
 
+
+
+
     // 오늘 섭취한 끼니별 칼로리 조회
     TodayCaloriesResponse getTodayCalories(String username);
+
+    void deleteMeal(
+            Long mealId,
+            String name);
 }

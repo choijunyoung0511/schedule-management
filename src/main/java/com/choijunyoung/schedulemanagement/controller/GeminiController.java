@@ -55,9 +55,13 @@ public class GeminiController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
     public FoodAnalysisResponse analyzeImage(
-            @RequestParam("file") MultipartFile file
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("amount") Integer amount
     ) {
-        return geminiService.analyzeFoodImage(file);
+        return geminiService.analyzeFoodImage(
+                file,
+                amount
+        );
     }
 
 }

@@ -48,8 +48,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/",
                                 "/index.html",
-                                "/style.css",
-                                "/app.js",
+                                "/css/**",
+                                "/js/**",
                                 "/favicon.ico"
                         ).permitAll()
 

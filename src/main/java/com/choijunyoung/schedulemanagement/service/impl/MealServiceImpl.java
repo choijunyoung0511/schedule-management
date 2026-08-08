@@ -46,7 +46,8 @@ public class MealServiceImpl implements MealService {
         Meal meal = new Meal(
                 user,
                 request.getMealType(),
-                request.getImageUrl()
+                request.getImageUrl(),
+                request.getAmount()
         );
 
         return mealRepository.save(meal);
@@ -155,5 +156,27 @@ public class MealServiceImpl implements MealService {
                 dinnerCalories,
                 snackCalories
         );
+    }
+    @Override
+    @Transactional
+    public void deleteMeal(
+            Long mealId,
+            String username
+    ) {
+        Meal meal = mealRepository.findById(mealId)
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                "식사 기록을 찾을 수 없습니다"
+                        )
+                );
+        if (!meal.getUser()
+                .getUsername()
+                .equals(username)) {
+            throw new IllegalArgumentException(
+                    "본인 기록만 삭제할 수 있습니다."
+            );
+        }
+        mealRepository.delete(meal);
+
     }
 }
